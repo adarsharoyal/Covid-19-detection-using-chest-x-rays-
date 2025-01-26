@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>COVID-19 Detection</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("https://www.cam.ac.uk/sites/www.cam.ac.uk/files/shorthand/235701/6aRPqwuTlp/assets/VUCjWWH1Iw/gettyimages-1216445906-4096x2304.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            background-color: #0099cc !important;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .navbar-brand i {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+
+        .navbar-nav .nav-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 1em;
+            color: #ffffff;
+        }
+
+        .content-section {
+            margin-top: 2em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #000;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="#">
+                        Stay Home
+                        <i class="bi bi-house-lock"></i>
+                        - Stay Safe
+                        <i class="bi bi-shield-lock icons"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-heading">
+        <span style="color: #ff0000; font-weight: bold;">COVID-19</span> Detection Using Chest X-Rays
+    </div>
+
+    <div class="container content-section">
+        <div id="content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                        <h4>Upload Your Chest X-Ray here</h4>
+                        <form action="http://localhost:5000/" id="upload-file" method="post" enctype="multipart/form-data">
+                            <label for="imageUpload" class="upload-label">
+                                click here
+                            </label>
+                            <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
+                        </form>
+
+                        <div class="image-section" style="display:none;">
+                            <div class="img-preview">
+                                <div id="imagePreview"></div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-info btn-lg" id="btn-predict">Predict!</button>
+                            </div>
+                        </div>
+
+                        <div class="loader" style="display:none;"></div>
+
+                        <h3>
+                            <h3>
+                                <span id="result" style="font-size: 20px; color: red;"> </span>
+                            </h3>
+                            
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-sm-6 bd">
+                    <h3>About COVID-19 Detection: </h3>
+                    
+                    <p>
+                        This model analyzes chest X-ray images to detect potential conditions such as 
+                        <span style="color: red; font-weight: bold;">COVID-19</span>, 
+                        <span style="color: yellow; font-weight: bold;">Pneumonia</span>, or confirm a 
+                        <span style="color: green; font-weight: bold;">Normal</span> status. Upload a chest X-ray image to receive an accurate diagnosis.
+                    </p>
+                      </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: linear-gradient(to right, #00CCFF 50%, #0099cc 50%); color: #FFFFFF; font-size: 14px; font-weight: bold; padding: 10px 0;">
+        <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript"></script>
+        <div class="container">
+            <p style="margin: 0; padding-left: 110px; padding-right: 10px;">
+                For Inquiries : <a href="mailto:adarsharoyals7@gmail.com" style="color: #333; text-decoration: none;">adarsharoyals7@gmail.com</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
