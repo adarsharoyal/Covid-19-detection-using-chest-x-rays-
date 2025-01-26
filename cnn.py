@@ -4,13 +4,22 @@ import os
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from flask import Flask, request, render_template
-
-from tensorflow.keras.preprocessing.image import img_to_array
+import gdown  # For downloading the model from Google Drive
 
 app = Flask(__name__)
 
+# Google Drive file ID
+file_id = "1FCU5Mn7TH5S8jODWiz2RcXjXKNotMkeL"
+url = f"https://drive.google.com/uc?id={file_id}"
+
+# Download the model
+model_path = os.path.join(os.getcwd(), "covid-19.h5")
+if not os.path.exists(model_path):  # Download only if the file doesn't exist
+    print("Downloading the model...")
+    gdown.download(url, model_path, quiet=False)
+
 # Load the pre-trained model
-model = load_model(r"C:\Users\adarsha\Desktop\covid-19\covid-19.h5", compile=False)
+model = load_model(model_path, compile=False)
 
 @app.route('/')
 def index():
@@ -34,7 +43,7 @@ def upload():
         preds = np.argmax(y, axis=1)  # Get the predicted class index
 
         # Define class labels
-        index = ['COVID-19', 'NORMAL', 'Pneumonia'  ]
+        index = ['COVID-19', 'NORMAL', 'Pneumonia']
         text = str(index[preds[0]])
 
         return text
